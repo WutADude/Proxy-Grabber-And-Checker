@@ -11,6 +11,8 @@ RU desc:
 
 Она максимально кривая, в ней полно багов и недочётов, но со временем я думаю я попробую исправить несколько десятков | сотен ',:) ошибок багов, но тут как уже сложится.
 
+!Интерфейс программы полностью на русском языке и только на нём!
+
 ___________________________________________________________________________________________________________________________________________________________________________________
 
 ENG desc:
@@ -22,6 +24,9 @@ When I first open it, it provides me with small data, which is written about at 
 
 
 It is as crooked as possible, it is full of bugs and shortcomings, but over time I think I will try to fix a few dozen | hundreds', :) bugs errors, but here it will be.
+
+
+!The program interface is completely in Russian and only in it!
 
 
 
