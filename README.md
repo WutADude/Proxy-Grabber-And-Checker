@@ -23,7 +23,7 @@ This software was developed by me from scratch without any source code, the resu
 When I first open it, it provides me with small data, which is written about at startup in the program itself ...
 
 
-It is as crooked as possible, it is full of bugs and shortcomings, but over time I think I will try to fix a few dozen | hundreds', :) bugs errors, but here it will be.
+It is as crooked as possible, it is full of bugs and shortcomings, but over time I think I will try to fix a few dozen | hundreds ',:) bugs errors, but here it will be.
 
 
 !The program interface is completely in Russian and only in it! (Lies, there are some minor exceptions)
