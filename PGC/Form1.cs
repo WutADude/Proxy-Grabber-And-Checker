@@ -46,6 +46,7 @@ namespace PGC
         bool warnwas;
         bool waslog;
         bool frameisgood = false;
+        bool isclosesaving = false;
         //отсчёт времени
         TimeSpan timework;
         DateTime begin_time;
@@ -82,7 +83,6 @@ namespace PGC
             await Task.Run(() =>
             {
                 richTextBox1.AppendText("Пытаюсь достать все типы прокси...\n");
-
                 try
                 {
                     using (var request = new HttpRequest())
@@ -90,32 +90,38 @@ namespace PGC
                         for (int i = 0; i < urlHT.Count; i++)
                         {
                             request.UserAgent = Http.ChromeUserAgent();
-                            HttpResponse rsp = request.Get(urlHT[i]);
-                            string[] gotHTTP = rsp.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-                            foreach (string prht in gotHTTP)
+                            try
                             {
-                                if (gottedHTTP.IndexOf(prht.Trim(new char[] { ' ' })) == -1 && !gottedHTTP.Contains(prht) && !Regex.IsMatch(prht, @"^[a-zA-Z]+$"))
+                                HttpResponse rsp = request.Get(urlHT[i]);
+                                string[] gotHTTP = rsp.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                                foreach (string prht in gotHTTP)
                                 {
-                                    if (prht.Length > 0)
+                                    if (gottedHTTP.IndexOf(prht.Trim(new char[] { ' ' })) == -1 && !gottedHTTP.Contains(prht) && !Regex.IsMatch(prht, @"^[a-zA-Z]+$"))
                                     {
-                                        gottedHTTP.Add(prht);
+                                        if (prht.Length > 0)
+                                        {
+                                            gottedHTTP.Add(prht);
+                                        }
+                                        proxloadedHT = gottedHTTP.Count;
                                     }
-                                    proxloadedHT = gottedHTTP.Count;
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
-                                else
-                                {
-                                    continue;
-                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                richTextBox1.AppendText($"Возникла проблема при граббе HTTP прокси: {ex.Message}\n");
+
                             }
                         }
                         richTextBox1.AppendText($"Получилось достать {proxloadedHT} HTTP прокси.\n");
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    richTextBox1.AppendText($"Возникла проблема при граббе HTTP прокси: {ex.Message}\nПроверю по новой через 3 сек.\n");
-                    Thread.Sleep(3000);
-                    GrabProxy();
                     Thread.CurrentThread.Abort();
                 }
                 try
@@ -125,33 +131,36 @@ namespace PGC
                         for (int i = 0; i < urlS4.Count; i++)
                         {
                             request2.UserAgent = Http.ChromeUserAgent();
-                            HttpResponse rsp2 = request2.Get(urlS4[i]);
-                            string[] gotS4 = rsp2.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-                            foreach (string s4 in gotS4)
+                            try
                             {
-                                if (gottedSOCKS4.IndexOf(s4.Trim(new char[] { ' ' })) == -1 && !gottedSOCKS4.Contains(s4) && !Regex.IsMatch(s4, @"^[a-zA-Z]+$"))
+                                HttpResponse rsp2 = request2.Get(urlS4[i]);
+                                string[] gotS4 = rsp2.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                                foreach (string s4 in gotS4)
                                 {
-                                    if (s4.Length > 0)
+                                    if (gottedSOCKS4.IndexOf(s4.Trim(new char[] { ' ' })) == -1 && !gottedSOCKS4.Contains(s4) && !Regex.IsMatch(s4, @"^[a-zA-Z]+$"))
                                     {
-                                        gottedSOCKS4.Add(s4);
+                                        if (s4.Length > 0)
+                                        {
+                                            gottedSOCKS4.Add(s4);
+                                        }
+                                        proxloadedS4 = gottedSOCKS4.Count;
                                     }
-                                    proxloadedS4 = gottedSOCKS4.Count;
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
-                                else
-                                {
-                                    continue;
-                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                richTextBox1.AppendText($"Возникла проблема при граббе SOCKS4 прокси: {ex.Message}\n");
                             }
                         }
                         richTextBox1.AppendText($"Получилось достать {proxloadedS4} SOCKS4 прокси.\n");
-
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    richTextBox1.AppendText($"Возникла проблема при граббе SOCKS4 прокси: {ex.Message}\nПроверю по новой через 3 сек.\n");
-                    Thread.Sleep(3000);
-                    GrabProxy();
                     Thread.CurrentThread.Abort();
                 }
                 try
@@ -161,33 +170,36 @@ namespace PGC
                         for (int i = 0; i < urlS4.Count; i++)
                         {
                             request3.UserAgent = Http.ChromeUserAgent();
-                            HttpResponse rsp3 = request3.Get(urlS5[i]);
-                            string[] gotS5 = rsp3.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-                            foreach (string s5 in gotS5)
+                            try
                             {
-                                if (gottedSOCKS5.IndexOf(s5.Trim(new char[] { ' ' })) == -1 && !gottedSOCKS5.Contains(s5) && !Regex.IsMatch(s5, @"^[a-zA-Z]+$"))
+                                HttpResponse rsp3 = request3.Get(urlS5[i]);
+                                string[] gotS5 = rsp3.ToString().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                                foreach (string s5 in gotS5)
                                 {
-                                    if (s5.Length > 0)
+                                    if (gottedSOCKS5.IndexOf(s5.Trim(new char[] { ' ' })) == -1 && !gottedSOCKS5.Contains(s5) && !Regex.IsMatch(s5, @"^[a-zA-Z]+$"))
                                     {
-                                        gottedSOCKS5.Add(s5);
+                                        if (s5.Length > 0)
+                                        {
+                                            gottedSOCKS5.Add(s5);
+                                        }
+                                        proxloadedS5 = gottedSOCKS5.Count;
                                     }
-                                    proxloadedS5 = gottedSOCKS5.Count;
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
-                                else
-                                {
-                                    continue;
-                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                richTextBox1.AppendText($"Возникла проблема при граббе SOCKS5 прокси: {ex.Message}\n");
                             }
                         }
                         richTextBox1.AppendText($"Получилось достать {proxloadedS5} SOCKS5 прокси.\n");
-
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    richTextBox1.AppendText($"Возникла проблема при граббе SOCKS5 прокси: {ex.Message}\nПроверю по новой через 3 сек.\n");
-                    Thread.Sleep(3000);
-                    GrabProxy();
                     Thread.CurrentThread.Abort();
                 }
                 Applyhead();
@@ -221,7 +233,6 @@ namespace PGC
                         + "https://www.proxy-list.download/api/v1/get?type=socks5" + "\n"
                         + "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt");
                     richTextBox1.AppendText($"Все необходимые действия первого запуска выполненны, более они выполняться не будут!\nМожете начинать использование ПО!\n");
-
                     Thread read = new Thread(ReadUrs);
                     read.Start();
                 }
@@ -243,7 +254,7 @@ namespace PGC
             try
             {
                 StreamReader reader1 = new StreamReader(directory + "\\urlsHTTP.txt");
-                string[] http = reader1.ReadToEnd().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                string[] http = reader1.ReadToEnd().Trim(new char[] {'\n'}).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
                 foreach (string ht in http)
                 {
                     if (urlHT.IndexOf(ht.Trim()) == -1)
@@ -253,7 +264,7 @@ namespace PGC
                 }
                 reader1.Close();
                 StreamReader reader2 = new StreamReader(directory + "\\urlsSOCKS4.txt");
-                string[] so4 = reader2.ReadToEnd().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                string[] so4 = reader2.ReadToEnd().Trim(new char[] { '\n' }).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
                 foreach (string soc4 in so4)
                 {
                     if (urlS4.IndexOf(soc4.Trim()) == -1)
@@ -263,7 +274,7 @@ namespace PGC
                 }
                 reader2.Close();
                 StreamReader reader3 = new StreamReader(directory + "\\urlsSOCKS5.txt");
-                string[] so5 = reader3.ReadToEnd().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                string[] so5 = reader3.ReadToEnd().Trim(new char[] { '\n' }).Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
                 foreach (string soc5 in so5)
                 {
                     if (urlS5.IndexOf(soc5.Trim()) == -1)
@@ -298,7 +309,6 @@ namespace PGC
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-
             Thread goch = new Thread(CheckDirAndUrls);
             goch.Start();
             ToolTip tp = new ToolTip();
@@ -353,6 +363,9 @@ namespace PGC
                         thread = new Thread(WorkerHttp);
                         thread2 = new Thread(WorkerSocks4);
                         thread3 = new Thread(WorkerSocks5);
+                        thread.IsBackground = true;
+                        thread2.IsBackground = true;
+                        thread3.IsBackground = true;
                         if (ischecking)
                         {
                             thread.Start();
@@ -555,10 +568,11 @@ namespace PGC
                             }
                         }
                     }
-                    if (gottedHTTP.Count == 0 && metroCheckBox1.Checked || gottedHTTP.Count == 0 && gottedSOCKS4.Count == 0 && gottedSOCKS5.Count == 0)
+                    if (gottedHTTP.Count == 0 & metroCheckBox1.Checked || gottedHTTP.Count == 0 & gottedSOCKS4.Count == 0 & gottedSOCKS5.Count == 0)
                     {
                         metroButton1.PerformClick();
                     }
+                    Thread.CurrentThread.Abort();
                 });
             }
             catch (Exception ex)
@@ -622,7 +636,7 @@ namespace PGC
                             }
                         }
                     }
-                    if (gottedSOCKS4.Count == 0 && gottedSOCKS5.Count == 0 && metroCheckBox2.Checked || gottedHTTP.Count == 0 && gottedSOCKS4.Count == 0 && gottedSOCKS5.Count == 0)
+                    if (gottedSOCKS4.Count == 0 & gottedSOCKS5.Count == 0 & metroCheckBox2.Checked || gottedHTTP.Count == 0 & gottedSOCKS4.Count == 0 & gottedSOCKS5.Count == 0)
                     {
                         metroButton1.PerformClick();
                     }
@@ -689,7 +703,7 @@ namespace PGC
                             }
                         }
                     }
-                    if (gottedHTTP.Count == 0 && gottedSOCKS4.Count == 0 && gottedSOCKS5.Count == 0)
+                    if (gottedSOCKS4.Count == 0 & gottedSOCKS5.Count == 0 & metroCheckBox2.Checked || gottedHTTP.Count == 0 & gottedSOCKS4.Count == 0 & gottedSOCKS5.Count == 0)
                     {
                         metroButton1.PerformClick();
                     }
@@ -735,7 +749,7 @@ namespace PGC
         private void SaveProx()
         {
             Thread clearlists = new Thread(ClearLists);
-            if (sumofthreads > 0)
+            if (sumofthreads > 0 && !isclosesaving)
             {
                 metroButton1.Enabled = false;
                 if (messagewas == false)
@@ -746,7 +760,7 @@ namespace PGC
                 Thread.Sleep(1000);
                 SaveProx();
             }
-            else
+            else if (sumofthreads == 0 || isclosesaving)
             {
                 metroButton1.Enabled = false;
                 if (!Directory.Exists(dirforsave) && goodHTTP.Count > 0 | goodSOCKS4.Count > 0 | goodSOCKS5.Count > 0)
@@ -772,6 +786,14 @@ namespace PGC
                     richTextBox1.AppendText($"Прошло времени со старта: {metroLabel31.Text}\n");
                     richTextBox1.AppendText("Сохранение завершено, открываю папку с результатами...\n");
                     Process.Start("explorer.exe", dirforsave);
+                    if (isclosesaving)
+                    {
+                        isclosesaving = false;
+                        richTextBox1.AppendText("Сейчас программа завершит работу...\n");
+                        richTextBox1.ScrollToCaret();
+                        Thread.Sleep(2500);
+                        Application.Exit();
+                    }
                     metroButton1.Enabled = true;
                     clearlists.Start();
                 }
@@ -798,6 +820,7 @@ namespace PGC
                     Process.Start("explorer.exe", dirforsave);
                     metroButton1.Enabled = true;
                     clearlists.Start();
+
                 }
             }
         }
@@ -849,11 +872,21 @@ namespace PGC
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (var proc in Process.GetProcessesByName("PGС"))
+            Thread closesave = new Thread(SaveProx);
+            if (ischecking)
             {
-                proc.Kill();
+                e.Cancel = true;
+                ischecking = false;
+                isclosesaving = true;
+                richTextBox1.AppendText("Вызвано принудительное сохранение проверенных прокси...\n");
+                closesave.Start();
+            }
+            else
+            {
+                e.Cancel = false;
+                Application.Exit();
             }
         }
 
