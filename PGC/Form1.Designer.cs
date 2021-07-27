@@ -180,7 +180,7 @@
             // 
             this.threadsCounterTrackBar.BackColor = System.Drawing.Color.Transparent;
             this.threadsCounterTrackBar.Location = new System.Drawing.Point(75, 17);
-            this.threadsCounterTrackBar.Maximum = 70;
+            this.threadsCounterTrackBar.Maximum = 150;
             this.threadsCounterTrackBar.Minimum = 1;
             this.threadsCounterTrackBar.Name = "threadsCounterTrackBar";
             this.threadsCounterTrackBar.Size = new System.Drawing.Size(113, 23);
