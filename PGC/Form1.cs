@@ -8,9 +8,8 @@ namespace PGC
 {
     public partial class mainWorkForm : MetroFramework.Forms.MetroForm
     {
-        //Воркеры для чека прокси
+        // Класс с функциями
         Functions _functions = new Functions();
-
 
         public mainWorkForm() // Инициализация формы
         {
@@ -225,6 +224,7 @@ namespace PGC
             if (checkHttpRadioButton.Checked)
                 _functions._typeOfChecking = 1;
             _functions._factorOfThreads = 1;
+            threadsCounterTrackBar.Maximum = 450;
         }
 
         private void checkSocks4RadioButton_CheckedChanged(object sender, EventArgs e)
@@ -232,6 +232,7 @@ namespace PGC
             if (checkSocks4RadioButton.Checked)
                 _functions._typeOfChecking = 2;
             _functions._factorOfThreads = 1;
+            threadsCounterTrackBar.Maximum = 450;
         }
 
         private void checkSocks5RadioButton_CheckedChanged(object sender, EventArgs e)
@@ -239,6 +240,7 @@ namespace PGC
             if (checkSocks5RadioButton.Checked)
                 _functions._typeOfChecking = 3;
             _functions._factorOfThreads = 1;
+            threadsCounterTrackBar.Maximum = 450;
         }
 
         private void checkBothSocksRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -246,6 +248,7 @@ namespace PGC
             if (checkBothSocksRadioButton.Checked)
                 _functions._typeOfChecking = 4;
             _functions._factorOfThreads = 2;
+            threadsCounterTrackBar.Maximum = 225;
         }
 
         private void checkAllRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -253,6 +256,7 @@ namespace PGC
             if (checkAllRadioButton.Checked)
                 _functions._typeOfChecking = 5;
             _functions._factorOfThreads = 3;
+            threadsCounterTrackBar.Maximum = 150;
         }
 
         private void timer4_Tick(object sender, EventArgs e) // Таймер обновления счётчиков
