@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Threading;
 using System.Diagnostics;
-using System.Windows.Forms;
-using Microsoft.Win32;
+using System.IO;
+using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
 using xNet;
 
 namespace PGC
