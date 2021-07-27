@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework;
 
 namespace PGC
 {
@@ -29,14 +30,16 @@ namespace PGC
             noi.Visible = false;
         }
 
-        private void metroLabel5_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://vk.com/artydavl");
-        }
-
         private void metroLabel7_Click(object sender, EventArgs e)
         {
-            Process.Start("https://lolz.guru/egozvaliartur/");
+            try
+            {
+                Process.Start("https://lolz.guru/wdude/");
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.Show(this, "Не удалось открыть ссылку в браузере, возможно недостаточно прав, или не выбран браузер по умолчанию", "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void metroLabel9_Click(object sender, EventArgs e)
@@ -49,7 +52,14 @@ namespace PGC
             noi.Icon = this.Icon;
             noi.Visible = true;
             noi.ShowBalloonTip(2000);
-            Process.Start("https://discord.com/login");
+            try
+            {
+                Process.Start("https://discord.com/login");
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.Show(this, "Не удалось открыть ссылку в браузере, возможно недостаточно прав, или не выбран браузер по умолчанию", "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             await Task.Delay(2000);
             noi.Visible = false;
         }
@@ -64,7 +74,26 @@ namespace PGC
 
         private void metroLabel11_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/WutADude");
+            try
+            {
+                Process.Start("https://github.com/WutADude");
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.Show(this, "Не удалось открыть ссылку в браузере, возможно недостаточно прав, или не выбран браузер по умолчанию", "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void metroLabel1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("https://my.qiwi.com/Artur-DZ3-5meKt6");
+            }
+            catch
+            {
+                MetroFramework.MetroMessageBox.Show(this, "Не удалось открыть ссылку в браузере, возможно недостаточно прав, или не выбран браузер по умолчанию", "Произошла ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

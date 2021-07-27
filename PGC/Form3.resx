@@ -117,15 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="proxyUpdateTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>11, 17</value>
-  </metadata>
-  <metadata name="countersAndOtherUpdateTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 15</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>51</value>
-  </metadata>
+  <data name="headersAndValuesRichTextBox.Text" xml:space="preserve">
+    <value>Введите сюда заголовки, которые будут отправляться с запросом.
+
+Символ "  |  " является разделителем между именем заголовка и значением.
+
+ЗАГОЛОВОК|ЗНАЧЕНИЕ ЗАГОЛОВКА
+
+Referer | https://somesite.com/213/23/11 (БЕЗ ПРОБЕЛОВ)</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
